@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useDropzone } from "react-dropzone";
+
+import { resizeImage } from "./image-utils";
 
 function App() {
+  const imageRef = document.getElementById("bullshitconversion");
+
+  const onDrop = acceptedFiles => {
+    acceptedFiles.forEach(async asyncfile => {
+      const b64 = await resizeImage(asyncfile, 1200);
+      if (imageRef) {
+        imageRef["src"] = b64;
+      }
+    });
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>
+      <img alt="party" src="party.gif" height="30px" /> Party Parrot Main Thread Usage Check
+      </h1>
+      <div className="dropzone" {...getRootProps()}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+      <img alt="output" id="bullshitconversion" />
     </div>
   );
 }

@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.app {
+  text-align: center;
+}
+
+.dropzone {
+  margin: 0 auto;
+  width: 50vw;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #ddd 5px dotted;
+  margin-bottom: 2rem;
+}
